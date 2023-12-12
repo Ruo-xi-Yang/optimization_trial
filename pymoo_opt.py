@@ -24,7 +24,7 @@ import FileGen
 # OPTIMISATION PARAMETERS -----------------------------------------------------
 
 output_opt_file = "1st_2D_output.txt"
-parent_dir = "/scratch/snx3000/lcarosro/Optimisation/3Dopt/8th_3Dopt_12deg"
+parent_dir = '/home/ry619/PyFR/optimization'
 optimisation = "2D"                  #"2D", "3D"
 
 DVs = 2                              # number of Design Variables
