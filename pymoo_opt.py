@@ -23,9 +23,9 @@ import FileGen
 
 # OPTIMISATION PARAMETERS -----------------------------------------------------
 
-output_opt_file = "8th_3Dopt_output.txt"
+output_opt_file = "1st_2D_output.txt"
 parent_dir = "/scratch/snx3000/lcarosro/Optimisation/3Dopt/8th_3Dopt_12deg"
-optimisation = "3D"                  #"2D", "3D"
+optimisation = "2D"                  #"2D", "3D"
 
 DVs = 2                              # number of Design Variables
 OFs = 2                              # number of Objective Functions
@@ -43,24 +43,24 @@ prob_c = 0.2                         # crossover probability
 eta_m = 15                           # mutation eta
 eta_c = 20                           # crossover eta
 
-population = 30                      # population size
-offspring = 15                       # number of offspring
+population = 2                      # population size
+offspring = 1                       # number of offspring
 n_max_gen = 5                        # number of generations
 
 global ngen
 restart = "No"                       # restart optimisation from checkpoint
-ngen = 2                             # initial generation
+ngen = 0                             # initial generation
 test = "No"                          # test reduced running time
 rep_test = "No"                      # test repeating generation
 
-initialseeding = "evalPOP"           # "DVs", "LHS", "evalPOP"
+initialseeding = "LHS"           # "DVs", "LHS", "evalPOP"
 seeding_path = "../../2Dopt/12deg/pymoo_v2/gen_20/Pareto_gen20.csv"
 evaluated_gen = 3
 evaluated_path = "gen_%s/optimum_gen%s.csv" %(evaluated_gen,evaluated_gen)
 
 # PROBLEM DEFINITION -----------------------------------------------------
 
-order = 4                            # polynomial order
+order = 1                            # polynomial order
 AoA = 12                             # Angle of attack
 c = 1                                # chord length
 
@@ -79,7 +79,7 @@ mu = c*u_inf*rho_inf/Re               # dynamic viscosity mu = 0.00033333333
 
 if optimisation == "2D":
     b = 1                            # span length
-    dt = 0.00007                     # time step
+    dt = 0.00014                     # time step
     tstart = 0                       # simulation start time
     tperturb = 5                     # sinusoidal perturbation time
     avg_from = 50                    # extract averages from
