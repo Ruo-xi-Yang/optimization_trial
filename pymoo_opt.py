@@ -9,7 +9,7 @@ from subprocess import call
 import math
 
 import pymoo
-from pymoo.algorithms.nsga2 import NSGA2
+# from pymoo.algorithms.nsga2 import NSGA2
 from pymoo.model.problem import Problem
 from pymoo.model.callback import Callback
 from pymoo.optimize import minimize
