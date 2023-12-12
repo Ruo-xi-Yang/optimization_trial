@@ -11,7 +11,7 @@ import math
 import pymoo
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.core.problem import Problem
-from pymoo.model.callback import Callback
+from pymoo.core.callback import Callback
 from pymoo.optimize import minimize
 from pymoo.visualization.scatter import Scatter
 from pymoo.factory import get_sampling, get_selection, get_crossover, get_mutation, get_termination
