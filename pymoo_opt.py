@@ -9,8 +9,8 @@ from subprocess import call
 import math
 
 import pymoo
-# from pymoo.algorithms.nsga2 import NSGA2
-from pymoo.model.problem import Problem
+from pymoo.algorithms.moo.nsga2 import NSGA2
+from pymoo.core.problem import Problem
 from pymoo.model.callback import Callback
 from pymoo.optimize import minimize
 from pymoo.visualization.scatter import Scatter
