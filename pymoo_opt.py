@@ -141,8 +141,9 @@ pert_ini_file = "Perturbation.ini"      # PyFR perturbation file name
 
 class CheckDesignSpaceBounds(Repair):
     
-    def _do(self, problem, pop, **kwargs):
-        Z = pop.get("X")
+    def _do(self, problem, Z, **kwargs):
+        
+        # Z = pop.get("X")
         f=open('%s/%s' %(parent_dir,output_opt_file),'a')
         print("\n\n------------------------", file=f)
         print("    Checking bounds", file=f)
