@@ -350,9 +350,9 @@ class MyProblem(Problem):
     
     def while_loop_check(self,finished,waitingtime1,running,waitingtime2,sorted_population,timebreak1,timebreak2,timeout1,timeout2,tfinish,while1broken,while2broken):
         while False in finished:
-            sleep_for(waitingtime1)
+            sleep_for(60)
             while False in running:
-                sleep_for(waitingtime2)
+                sleep_for(60)
                 i = 0
                 for row in sorted_population:
                     idv_path = get_idv_dir(i,row[0],row[1],ngen)
