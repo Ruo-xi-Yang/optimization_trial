@@ -817,7 +817,7 @@ if restart == "No":
                       eliminate_duplicates=True
                       )
     algorithm.setup(problem,
-                   algorithm,
+                   # algorithm,
                    termination,
                    callback=MyCallback(),
                    verbose=True,
