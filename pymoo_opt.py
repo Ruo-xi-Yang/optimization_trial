@@ -178,7 +178,7 @@ class CheckDesignSpaceBounds(Repair):
                           , file=f)
                     print("x_a="+str("%.3f" %x_a)+" --> x_a="+str("%.3f" %x_a_modif)
                           +"\n", file=f)
-        pop.set("X", Z)
+        # pop.set("X", Z)
         f.close()
         return pop
 
