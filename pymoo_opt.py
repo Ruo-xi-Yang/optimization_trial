@@ -790,7 +790,7 @@ if initialseeding =="evalPOP":
     f.close()
     sampling = eval_pop(evaluated_path,"DV")                       # already evaluated population
 # crossover=get_crossover("real_sbx", prob=prob_c, eta=eta_c)   # Simulated Binary Crossover
-crossover=get_crossover(prob=prob_c, eta=eta_c)
+crossover=SBX(prob=prob_c, eta=eta_c)
 # mutation=get_mutation("real_pm", prob=prob_m, eta=eta_m)      # Polynomial Mutation
 mutation = PolynomialMutation(prob=prob_m, eta=eta_m)
 termination = get_termination("n_gen", n_max_gen)             # Termination ngen
