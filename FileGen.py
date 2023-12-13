@@ -234,10 +234,15 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
     f.write('printf "\\n- GMSH"'+'\n') 
     f.write('printf "\\nGenerating mesh \\n"'+'\n') 
     if optimisation == "2D":
-        f.write('/users/lcarosro/dependencies/gmsh/build/gmsh '+str(AoA)+
-                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.geo -2 '+#str(AoA)+
-                #'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '+
-                '&> gmsh.log'+'\n') 
+        # f.write('/users/lcarosro/dependencies/gmsh/build/gmsh '+str(AoA)+
+        #         'AoA-gen-'+str(n)+'-idv-'+str(i)+'.geo -2 '+#str(AoA)+
+        #         #'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '+
+        #         '&> gmsh.log'+'\n') 
+
+        f.write('gmsh -2 -o '+str(AoA)+
+                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '+str(AoA)+
+                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.geo '+'&> gmsh.log'+'\n') 
+        
         f.write('sed -n \'45p\' gmsh.log'+'\n') 
         f.write('sed -n \'46p\' gmsh.log'+'\n')
     if optimisation == "3D":
