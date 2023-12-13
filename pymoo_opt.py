@@ -476,7 +476,7 @@ class MyProblem(Problem):
     def data_extract(self,i,dv1,dv2):        
         output_forces = 10
         # not_wanted_lines = avg_from/(dt*output_forces)
-        not_wanted_lines = 15000
+        not_wanted_lines = 7000
         q_inf = 0.5*rho_inf*u_inf**2
         S = c*b
         clvalues = []
