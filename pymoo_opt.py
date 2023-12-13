@@ -95,8 +95,8 @@ if optimisation == "2D":
     dt = 0.00014                     # time step
     tstart = 0                       # simulation start time
     tperturb = 5                     # sinusoidal perturbation time
-    avg_from = 50                    # extract averages from
-    tend = 100                       # total convective times
+    avg_from = 20                    # extract averages from
+    tend = 40                       # total convective times
     GPUs = 1                         # number of GPUs for parallelisation
     wctime = '0-03:00:00'            # wall clock time for each individual to run
     waitingtime1 = 32*60             # waiting time while all cases are running
@@ -475,7 +475,8 @@ class MyProblem(Problem):
             
     def data_extract(self,i,dv1,dv2):        
         output_forces = 10
-        not_wanted_lines = avg_from/(dt*output_forces)
+        # not_wanted_lines = avg_from/(dt*output_forces)
+        not_wanted_lines = 15000
         q_inf = 0.5*rho_inf*u_inf**2
         S = c*b
         clvalues = []
