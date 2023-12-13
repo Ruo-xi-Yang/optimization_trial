@@ -228,7 +228,7 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
     f=open('%s/eval.sh' %idvpath,'w')
     f.write('#!/bin/bash'+'\n') 
     f.write(''+'\n') 
-    f.write('source /users/ry619/.bashrc'+'\n') 
+    f.write('source /home/ry619/.bashrc'+'\n') 
     # f.write('source /users/lcarosro/v2pyfrv12/bin/activate'+'\n') 
     f.write(''+'\n') 
     f.write('printf "\\n- GMSH"'+'\n') 
