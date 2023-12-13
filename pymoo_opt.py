@@ -27,7 +27,8 @@ from pymoo.operators.sampling.lhs import LHS
 from pymoo.termination import get_termination
 
 # from pymoo.factory import get_sampling, get_selection, get_crossover, get_mutation, get_termination
-from pymoo.model.repair import Repair
+# from pymoo.model.repair import Repair
+from pymoo.core.repair import Repair
 
 # myfiles
 
