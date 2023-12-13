@@ -12,16 +12,19 @@ import pymoo
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.core.problem import Problem
 from pymoo.core.callback import Callback
+
 # from pymoo.algorithms.nsga2 import NSGA2
 # from pymoo.model.problem import Problem
 # from pymoo.model.callback import Callback
+
 from pymoo.optimize import minimize
 from pymoo.visualization.scatter import Scatter
-from pymoo.core.mutation.Mutation
-from pymoo.core.crossover.Crossover
-from pymoo.core.selection.Selection
+
+from pymoo.operators.mutation.pm import PolynomialMutation
+from pymoo.operators.crossover.sbx import SBX
+from pymoo.operators.selection.tournament import TournamentSelection
+from pymoo.operators.sampling.lhs import LHS
 from pymoo.core.termination.Termination
-from pymoo.core.sampling.Sampling
 
 # from pymoo.factory import get_sampling, get_selection, get_crossover, get_mutation, get_termination
 from pymoo.model.repair import Repair
@@ -778,16 +781,20 @@ if initialseeding =="LHS":
     f=open('%s/%s' %(parent_dir,output_opt_file),'a')
     print("\n> Initialising from Latin Hypercube Sampling\n",file=f)
     f.close()
-    sampling=get_sampling('real_lhs')                         # latin hypercube sampling
+    # sampling=get_sampling('real_lhs')                         # latin hypercube sampling
+    sampling = LHS()
 if initialseeding =="evalPOP":
     f=open('%s/%s' %(parent_dir,output_opt_file),'a')
     print("\n> Initialising from pre-evaluated population\n",file=f)
     f.close()
     sampling = eval_pop(evaluated_path,"DV")                       # already evaluated population
-crossover=get_crossover("real_sbx", prob=prob_c, eta=eta_c)   # Simulated Binary Crossover
-mutation=get_mutation("real_pm", prob=prob_m, eta=eta_m)      # Polynomial Mutation
+# crossover=get_crossover("real_sbx", prob=prob_c, eta=eta_c)   # Simulated Binary Crossover
+crossover=get_crossover(prob=prob_c, eta=eta_c)
+# mutation=get_mutation("real_pm", prob=prob_m, eta=eta_m)      # Polynomial Mutation
+mutation = PolynomialMutation(prob=prob_m, eta=eta_m)
 termination = get_termination("n_gen", n_max_gen)             # Termination ngen
 #selection=get_selection('tournament', {'pressure':2,'func_comp':binary_tournament})
+#selection = TournamentSelection(pressure=2, func_comp=binary_tournament)
 
 # ALGORITHM --------------------------------------------------------------------
 
