@@ -95,8 +95,8 @@ if optimisation == "2D":
     dt = 0.00014                     # time step
     tstart = 0                       # simulation start time
     tperturb = 5                     # sinusoidal perturbation time
-    avg_from = 20                    # extract averages from
-    tend = 40                       # total convective times
+    avg_from = 10                  # extract averages from
+    tend = 20                       # total convective times
     GPUs = 1                         # number of GPUs for parallelisation
     wctime = '0-03:00:00'            # wall clock time for each individual to run
     waitingtime1 = 32*60             # waiting time while all cases are running
