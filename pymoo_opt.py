@@ -242,7 +242,7 @@ class MyProblem(Problem):
             i = 0
             for row in sorted_population:
                 idv_path = get_idv_dir(i,row[0],row[1],ngen)
-                last_sol_file = "gen-%s-idv-%s_%s.00.pyfrs" %(ngen,i,tend)
+                last_sol_file = "gen-%s-idv-%s_%s.00.pyfrs" %(ngen,i,tend-5)
                 sol_path = os.path.join(idv_path, last_sol_file)
                 outputfile = self.check_for_files(idv_path)
                 if os.path.isfile(sol_path):
