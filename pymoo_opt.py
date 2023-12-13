@@ -24,7 +24,7 @@ from pymoo.operators.mutation.pm import PolynomialMutation
 from pymoo.operators.crossover.sbx import SBX
 from pymoo.operators.selection.tournament import TournamentSelection
 from pymoo.operators.sampling.lhs import LHS
-from pymoo.core.termination.Termination
+from pymoo.termination import get_termination
 
 # from pymoo.factory import get_sampling, get_selection, get_crossover, get_mutation, get_termination
 from pymoo.model.repair import Repair
