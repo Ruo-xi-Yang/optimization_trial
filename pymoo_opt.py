@@ -819,7 +819,7 @@ if restart == "No":
     algorithm.setup(problem,
                    # algorithm,
                    termination,
-                   # callback=MyCallback(),
+                   callback=MyCallback(),
                    verbose=True,
                    save_history=True,
                    copy_algorithm=False,
