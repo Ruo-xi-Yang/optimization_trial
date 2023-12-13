@@ -12,9 +12,18 @@ import pymoo
 from pymoo.algorithms.moo.nsga2 import NSGA2
 from pymoo.core.problem import Problem
 from pymoo.core.callback import Callback
+# from pymoo.algorithms.nsga2 import NSGA2
+# from pymoo.model.problem import Problem
+# from pymoo.model.callback import Callback
 from pymoo.optimize import minimize
 from pymoo.visualization.scatter import Scatter
-from pymoo.factory import get_sampling, get_selection, get_crossover, get_mutation, get_termination
+from pymoo.core.mutation.Mutation
+from pymoo.core.crossover.Crossover
+from pymoo.core.selection.Selection
+from pymoo.core.termination.Termination
+from pymoo.core.sampling.Sampling
+
+# from pymoo.factory import get_sampling, get_selection, get_crossover, get_mutation, get_termination
 from pymoo.model.repair import Repair
 
 # myfiles
