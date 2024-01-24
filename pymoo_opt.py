@@ -317,7 +317,7 @@ class MyProblem(Problem):
         FileGen.boundary_conditions(path,optimisation,main_ini_file,0,u_inf,rho_inf,p_inf)
         # second ini file
         FileGen.ini_file(path,second_ini_file,gamma,mu,Pr,order,tstart,tend,dt)
-        FileGen.plugin_airfoilforces(path,second_ini_file)
+        FileGen.plugin_airfoilforces_second(path,second_ini_file)
         FileGen.plugin_soln_writer(path,second_ini_file,(tend-tperturb)/2,ngen,i)
         FileGen.plugin_soln_avg(path,optimisation,second_ini_file,avg_from,tend,ngen,i)
         FileGen.plugin_sampler(path,optimisation,second_ini_file)
