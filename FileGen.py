@@ -266,6 +266,9 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
     if optimisation == "2D":
         f.write('pyfr run -b openmp -p '+str(AoA)+
                 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm Re3000M015.ini')
+        # run for the second ini
+        f.write('pyfr run -b openmp -p '+str(AoA)+
+                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm Re6000M03.ini')
     if optimisation == "3D":
         f.write('sbatch p_job.slurm'+'\n')
     f.close()
