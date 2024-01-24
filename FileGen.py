@@ -5,44 +5,44 @@ import os
 
 # SUBMISSION FILE -----------------------------------------------------------------------------------
 
-def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_sol_file,t,opt):
-    s=open('%s/%s_job.slurm' %(idvpath,t),'w')
-    s.write('#!/bin/bash -l'+'\n')
-    s.write('#'+'\n')
-    s.write('#'+'\n')
-    s.write('#SBATCH --job-name=2D'+str(t)+'_idv_'+str(i)+'_x_'+str("%.3f" %x)+
-            '_y_'+str("%.3f" %y)+'\n')
-    s.write('#SBATCH --time='+wctime+'\n')
-    s.write('#SBATCH --nodes='+str(GPUs)+'\n')
-    s.write('#SBATCH --ntasks-per-node=1'+'\n')
-    s.write('#SBATCH --partition=normal'+'\n')
-    s.write('#SBATCH --constraint=gpu'+'\n')
-    s.write('#SBATCH --account=s1075'+'\n')
-    s.write(''+'\n')
-    s.write('export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK'+'\n')
-    s.write('export CRAY_CUDA_MPS=1'+'\n')
-    s.write('export HDF5_USE_FILE_LOCKING=\'FALSE\''+'\n')
-    s.write(''+'\n')
-    s.write('source /users/lcarosro/.bashrc'+'\n')
-    s.write('source /users/lcarosro/v2pyfrv12/bin/activate'+'\n')
-    s.write(''+'\n')
-    if opt == "3D":
-        if t == "p":
-            s.write('srun --unbuffered --ntasks='+str(GPUs)+
-                ' --tasks-per-node=1 pyfr run -b cuda -p '+str(AoA)+
-                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+p_ini_file+'\n')
-        elif t == "u":
-            s.write('srun --unbuffered --ntasks='+str(GPUs)+
-                ' --tasks-per-node=1 pyfr restart -b cuda -p '+str(AoA)+'AoA-gen-'
-                +str(n)+'-idv-'+str(i)+'.pyfrm '+p_sol_file+' '+main_ini_file+'\n')
-    elif opt == "2D":
-        s.write('srun --unbuffered --ntasks='+str(GPUs)+
-            ' --tasks-per-node=1 pyfr run -b cuda -p '+str(AoA)+
-            'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+p_ini_file+'\n')
-        s.write('srun --unbuffered --ntasks='+str(GPUs)+
-            ' --tasks-per-node=1 pyfr restart -b cuda -p '+str(AoA)+'AoA-gen-'
-            +str(n)+'-idv-'+str(i)+'.pyfrm '+p_sol_file+' '+main_ini_file+'\n')
-    s.close()
+# def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_sol_file,t,opt):
+#     s=open('%s/%s_job.slurm' %(idvpath,t),'w')
+#     s.write('#!/bin/bash -l'+'\n')
+#     s.write('#'+'\n')
+#     s.write('#'+'\n')
+#     s.write('#SBATCH --job-name=2D'+str(t)+'_idv_'+str(i)+'_x_'+str("%.3f" %x)+
+#             '_y_'+str("%.3f" %y)+'\n')
+#     s.write('#SBATCH --time='+wctime+'\n')
+#     s.write('#SBATCH --nodes='+str(GPUs)+'\n')
+#     s.write('#SBATCH --ntasks-per-node=1'+'\n')
+#     s.write('#SBATCH --partition=normal'+'\n')
+#     s.write('#SBATCH --constraint=gpu'+'\n')
+#     s.write('#SBATCH --account=s1075'+'\n')
+#     s.write(''+'\n')
+#     s.write('export OMP_NUM_THREADS=$SLURM_CPUS_PER_TASK'+'\n')
+#     s.write('export CRAY_CUDA_MPS=1'+'\n')
+#     s.write('export HDF5_USE_FILE_LOCKING=\'FALSE\''+'\n')
+#     s.write(''+'\n')
+#     s.write('source /users/lcarosro/.bashrc'+'\n')
+#     s.write('source /users/lcarosro/v2pyfrv12/bin/activate'+'\n')
+#     s.write(''+'\n')
+#     if opt == "3D":
+#         if t == "p":
+#             s.write('srun --unbuffered --ntasks='+str(GPUs)+
+#                 ' --tasks-per-node=1 pyfr run -b cuda -p '+str(AoA)+
+#                 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+p_ini_file+'\n')
+#         elif t == "u":
+#             s.write('srun --unbuffered --ntasks='+str(GPUs)+
+#                 ' --tasks-per-node=1 pyfr restart -b cuda -p '+str(AoA)+'AoA-gen-'
+#                 +str(n)+'-idv-'+str(i)+'.pyfrm '+p_sol_file+' '+main_ini_file+'\n')
+#     elif opt == "2D":
+#         s.write('srun --unbuffered --ntasks='+str(GPUs)+
+#             ' --tasks-per-node=1 pyfr run -b cuda -p '+str(AoA)+
+#             'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+p_ini_file+'\n')
+#         s.write('srun --unbuffered --ntasks='+str(GPUs)+
+#             ' --tasks-per-node=1 pyfr restart -b cuda -p '+str(AoA)+'AoA-gen-'
+#             +str(n)+'-idv-'+str(i)+'.pyfrm '+p_sol_file+' '+main_ini_file+'\n')
+#     s.close()
 
 # PYFR FILES -----------------------------------------------------------------------------------    
 
