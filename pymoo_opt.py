@@ -305,6 +305,7 @@ class MyProblem(Problem):
         if optimisation == "3D":
             FileGen.cirrus_jobfile(ngen,path,GPUs,wctimep,i,dv1,dv2,AoA,pert_ini_file,
                                main_ini_file,pert_sol_file,"p",optimisation)
+            
         FileGen.cirrus_jobfile(ngen,path,GPUs,wctime,i,dv1,dv2,AoA,pert_ini_file,
                                main_ini_file,pert_sol_file,"u",optimisation)
         # main ini file
@@ -314,6 +315,13 @@ class MyProblem(Problem):
         FileGen.plugin_soln_avg(path,optimisation,main_ini_file,avg_from,tend,ngen,i)
         FileGen.plugin_sampler(path,optimisation,main_ini_file)
         FileGen.boundary_conditions(path,optimisation,main_ini_file,0,u_inf,rho_inf,p_inf)
+        # second ini file
+        FileGen.ini_file(path,second_ini_file,gamma,mu,Pr,order,tstart,tend,dt)
+        FileGen.plugin_airfoilforces(path,second_ini_file)
+        FileGen.plugin_soln_writer(path,second_ini_file,(tend-tperturb)/2,ngen,i)
+        FileGen.plugin_soln_avg(path,optimisation,second_ini_file,avg_from,tend,ngen,i)
+        FileGen.plugin_sampler(path,optimisation,second_ini_file)
+        FileGen.boundary_conditions(path,optimisation,second_ini_file,0,u_inf_2,rho_inf,p_inf)
         # perturbation ini file
         FileGen.ini_file(path,pert_ini_file,gamma,mu,Pr,order,tstart,tperturb,dt)
         FileGen.plugin_airfoilforces(path,pert_ini_file)
