@@ -135,7 +135,7 @@ if optimisation == "3D":
     if rep_test == "Yes":
         timeout1 = 1; timeout2 = timeout1*2
 
-main_ini_file = "Re3000M015.ini"        # PyFR initial file name
+main_ini_file = "Re6000.ini"        # PyFR initial file name
 second_ini_file = "Re6000M03.ini"       # Second initial file with doubled v
 pert_ini_file = "Perturbation.ini"      # PyFR perturbation file name
 
