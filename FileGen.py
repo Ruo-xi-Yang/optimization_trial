@@ -119,7 +119,16 @@ def plugin_airfoilforces(idvpath,ini_file):
     f.write('header = true'+'\n') 
     f.write(''+'\n') 
     f.close()
-
+    
+def plugin_airfoilforces_second(idvpath,ini_file):
+    f=open('%s/%s' %(idvpath,ini_file),'a')  
+    f.write('[soln-plugin-fluidforce-airfoil]'+'\n') 
+    f.write('nsteps = 10'+'\n') 
+    f.write('file = airfoil-forces-2.csv'+'\n') 
+    f.write('header = true'+'\n') 
+    f.write(''+'\n') 
+    f.close()
+    
 def plugin_soln_writer(idvpath,ini_file,tout,ngen,idvnumber):
     f=open('%s/%s' %(idvpath,ini_file),'a')  
     f.write('[soln-plugin-writer]'+'\n') 
