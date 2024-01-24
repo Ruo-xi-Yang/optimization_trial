@@ -80,6 +80,7 @@ c = 1                                # chord length
 Re = 3000                            # Reynolds number
 Ma = 0.15                            # Mach number
 u_inf = 1                            # free-stream velocity
+u_inf_2 = 2
 rho_inf = 1                          # free-stream density
 
 gamma = 1.4                          # Heat capacity ratio
@@ -135,6 +136,7 @@ if optimisation == "3D":
         timeout1 = 1; timeout2 = timeout1*2
 
 main_ini_file = "Re3000M015.ini"        # PyFR initial file name
+second_ini_file = "Re6000M03.ini"       # Second initial file with doubled v
 pert_ini_file = "Perturbation.ini"      # PyFR perturbation file name
 
 # DESIGN SPACE BOUNDS ------------------------------------------------------
