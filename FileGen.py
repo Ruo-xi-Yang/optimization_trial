@@ -273,59 +273,59 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
         'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm .'+'\n') 
     f.write('printf "\\n- Job submission\\n"'+'\n') 
     if optimisation == "2D":
-        f.write('pyfr run -b openmp -p '+str(AoA)+
+        f.write('mpiexec -n <cores/devices>pyfr run -b openmp -p '+str(AoA)+
                 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm Re3000M015.ini')
     if optimisation == "3D":
         f.write('sbatch p_job.slurm'+'\n')
     f.close()
     
-#Second Evaluation
+# #Second Evaluation
 
-def eval_file_2(n,i,idvpath,optimisation,AoA,GPUs):
-    f=open('%s/eval.sh' %idvpath,'w')
-    f.write('#!/bin/bash'+'\n') 
-    f.write(''+'\n') 
-    f.write('source /home/ry619/.bashrc'+'\n') 
-    # f.write('source /users/lcarosro/v2pyfrv12/bin/activate'+'\n') 
-    f.write(''+'\n') 
-    f.write('printf "\\n- GMSH"'+'\n') 
-    f.write('printf "\\nGenerating mesh \\n"'+'\n') 
-    if optimisation == "2D":
-        # f.write('/users/lcarosro/dependencies/gmsh/build/gmsh '+str(AoA)+
-        #         'AoA-gen-'+str(n)+'-idv-'+str(i)+'.geo -2 '+#str(AoA)+
-        #         #'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '+
-        #         '&> gmsh.log'+'\n') 
+# def eval_file_2(n,i,idvpath,optimisation,AoA,GPUs):
+#     f=open('%s/eval.sh' %idvpath,'w')
+#     f.write('#!/bin/bash'+'\n') 
+#     f.write(''+'\n') 
+#     f.write('source /home/ry619/.bashrc'+'\n') 
+#     # f.write('source /users/lcarosro/v2pyfrv12/bin/activate'+'\n') 
+#     f.write(''+'\n') 
+#     f.write('printf "\\n- GMSH"'+'\n') 
+#     f.write('printf "\\nGenerating mesh \\n"'+'\n') 
+#     if optimisation == "2D":
+#         # f.write('/users/lcarosro/dependencies/gmsh/build/gmsh '+str(AoA)+
+#         #         'AoA-gen-'+str(n)+'-idv-'+str(i)+'.geo -2 '+#str(AoA)+
+#         #         #'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '+
+#         #         '&> gmsh.log'+'\n') 
 
-        f.write('gmsh -2 -o '+str(AoA)+
-                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '+str(AoA)+
-                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.geo '+'&> gmsh.log'+'\n') 
+#         f.write('gmsh -2 -o '+str(AoA)+
+#                 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '+str(AoA)+
+#                 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.geo '+'&> gmsh.log'+'\n') 
         
-        f.write('sed -n \'45p\' gmsh.log'+'\n') 
-        f.write('sed -n \'46p\' gmsh.log'+'\n')
-    if optimisation == "3D":
-        f.write('/users/lcarosro/dependencies/gmsh/build/gmsh '+str(AoA)+
-                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.geo -3 '+str(AoA)+
-                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '+'&> gmsh.log'+'\n')  
-        f.write('sed -n \'164p\' gmsh.log'+'\n') 
-        f.write('sed -n \'165p\' gmsh.log'+'\n') 
-        f.write('sed -n \'166p\' gmsh.log'+'\n') 
-        f.write('sed -n \'167p\' gmsh.log'+'\n') 
-        f.write('sed -n \'168p\' gmsh.log'+'\n') 
-        f.write('sed -n \'169p\' gmsh.log'+'\n') 
-    f.write('printf "\\n- PyFR"'+'\n') 
-    f.write('printf "\\nImporting gmsh mesh to pyfrm\\n"'+'\n') 
-    f.write('pyfr import '+str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '
-            +str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm'+'\n') 
-    if optimisation == "3D":
-        f.write('pyfr partition '+str(GPUs)+' '+str(AoA)+
-        'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm .'+'\n') 
-    f.write('printf "\\n- Job submission\\n"'+'\n') 
-    if optimisation == "2D":
-        f.write('pyfr run -b openmp -p '+str(AoA)+
-                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm Re6000M03.ini')
-    if optimisation == "3D":
-        f.write('sbatch p_job.slurm'+'\n')
-    f.close()
+#         f.write('sed -n \'45p\' gmsh.log'+'\n') 
+#         f.write('sed -n \'46p\' gmsh.log'+'\n')
+#     if optimisation == "3D":
+#         f.write('/users/lcarosro/dependencies/gmsh/build/gmsh '+str(AoA)+
+#                 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.geo -3 '+str(AoA)+
+#                 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '+'&> gmsh.log'+'\n')  
+#         f.write('sed -n \'164p\' gmsh.log'+'\n') 
+#         f.write('sed -n \'165p\' gmsh.log'+'\n') 
+#         f.write('sed -n \'166p\' gmsh.log'+'\n') 
+#         f.write('sed -n \'167p\' gmsh.log'+'\n') 
+#         f.write('sed -n \'168p\' gmsh.log'+'\n') 
+#         f.write('sed -n \'169p\' gmsh.log'+'\n') 
+#     f.write('printf "\\n- PyFR"'+'\n') 
+#     f.write('printf "\\nImporting gmsh mesh to pyfrm\\n"'+'\n') 
+#     f.write('pyfr import '+str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '
+#             +str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm'+'\n') 
+#     if optimisation == "3D":
+#         f.write('pyfr partition '+str(GPUs)+' '+str(AoA)+
+#         'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm .'+'\n') 
+#     f.write('printf "\\n- Job submission\\n"'+'\n') 
+#     if optimisation == "2D":
+#         f.write('pyfr run -b openmp -p '+str(AoA)+
+#                 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm Re6000M03.ini')
+#     if optimisation == "3D":
+#         f.write('sbatch p_job.slurm'+'\n')
+#     f.close()
 
     
 # MESH FILE -----------------------------------------------------------------------------------
