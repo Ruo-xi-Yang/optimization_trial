@@ -495,7 +495,12 @@ class MyProblem(Problem):
         S = c*b
         clvalues = []
         cdvalues = []
+        clvalues_2 = []
+        cdvalues_2 = []
         idv_path = get_idv_dir(i,dv1,dv2,ngen)
+        
+        # Compute cl and cd of the first simulation
+        
         if os.path.isfile('%s/airfoil-forces.csv' %idv_path):
             with open('%s/airfoil-forces.csv' %idv_path, 'r') as OFV:      
                 for line_number, line in enumerate(OFV, 1):
@@ -522,14 +527,46 @@ class MyProblem(Problem):
             OFV.close
         else:
             cl = 100.0; cd = 100.0
+            
+        if os.path.isfile('%s/airfoil-forces-2.csv' %idv_path):
+            with open('%s/airfoil-forces-2.csv' %idv_path, 'r') as OFV:      
+                for line_number, line in enumerate(OFV, 1):
+                    if line_number <= not_wanted_lines:
+                        continue
+                    linesplit = line.strip().split(",")  
+                    if not linesplit:  # empty
+                        continue    
+                    if optimisation == "2D":
+                        clvalues_2.append((float(linesplit[2])+float(linesplit[4]))
+                                         /(q_inf*S))
+                        cdvalues_2.append((float(linesplit[1])+float(linesplit[3]))
+                                         /(q_inf*S))
+                    if optimisation == "3D":
+                        clvalues_2.append((float(linesplit[2])+float(linesplit[5]))
+                                         /(q_inf*S))
+                        cdvalues_2.append((float(linesplit[1])+float(linesplit[4]))
+                                         /(q_inf*S))
+                if len(clvalues)>0:
+                    cl_2 = sum(clvalues_2)/float(len(clvalues_2))
+                    cd_2 = sum(cdvalues_2)/float(len(cdvalues_2))
+                else:
+                    cl_2 = 100.0; cd_2 = 100.0
+            OFV.close
+        else:
+            cl_2 = 100.0; cd_2 = 100.0
+            
+        cl_total = (cl + cl_2)/2
+        cd_total = (cd + cd_2)/2
+        
+         
         with open('%s/cl_cd_idv.csv' %idv_path, 'w') as DV:
-            DV.write(str(cl)+','+str(cd))
+            DV.write(str(cl_total)+','+str(cd_total))
         DV.close
         f=open('%s/%s' %(parent_dir,output_opt_file),'a')
         print("\n- Individual "+str(i), file=f)
-        print("Cl = "+str("%.3f" %cl)+", Cd = "+str("%.3f" %cd), file=f)
+        print("Cl = "+str("%.3f" %cl_total)+", Cd = "+str("%.3f" %cd_total), file=f)
         f.close()
-        forces = [-cl,cd]
+        forces = [-cl_total,cd_total]
         return forces
 
     def offspring_to_file(self,i,ngen,dv1,dv2,of1,of2):
