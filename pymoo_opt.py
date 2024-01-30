@@ -501,8 +501,8 @@ class MyProblem(Problem):
         
         # Compute cl and cd of the first simulation
         
-        if os.path.isfile('%s/airfoil-forces.csv' %idv_path):
-            with open('%s/airfoil-forces.csv' %idv_path, 'r') as OFV:      
+        if os.path.isfile('%s/airfoil-forces-2.csv' %idv_path):
+            with open('%s/airfoil-forces-2.csv' %idv_path, 'r') as OFV:      
                 for line_number, line in enumerate(OFV, 1):
                     if line_number <= not_wanted_lines:
                         continue
