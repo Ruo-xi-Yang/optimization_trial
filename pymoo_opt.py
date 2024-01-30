@@ -222,7 +222,7 @@ class MyProblem(Problem):
             # RUNNING --------------------------------------------------
             (running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
             if optimisation == "2D":
-                sleep_for(60)
+                sleep_for(30)
             if (optimisation == "3D" and run_p_sep):
                 #running = np.full((len(X), 1), False, dtype=bool)
                 #finished = np.full((len(X), 1), False, dtype=bool)
@@ -261,7 +261,7 @@ class MyProblem(Problem):
             self.while_loop_check(finished,waitingtime1,running,waitingtime2,sorted_population,timebreak1,timebreak2,timeout1,timeout2,tend,while1broken,while2broken)
         if not (ngen == evaluated_gen and initialseeding == "evalPOP"):
             # POST-PROCESSING --------------------------------------------------
-            sleep_for(60)
+            sleep_for(30)
             first_line(ngen,"offspring")
             i = 0
             for row in sorted_population:  
@@ -364,9 +364,9 @@ class MyProblem(Problem):
     
     def while_loop_check(self,finished,waitingtime1,running,waitingtime2,sorted_population,timebreak1,timebreak2,timeout1,timeout2,tfinish,while1broken,while2broken):
         while False in finished:
-            sleep_for(60)
+            sleep_for(30)
             while False in running:
-                sleep_for(60)
+                sleep_for(30)
                 i = 0
                 for row in sorted_population:
                     idv_path = get_idv_dir(i,row[0],row[1],ngen)
