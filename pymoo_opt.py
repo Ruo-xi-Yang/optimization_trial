@@ -332,7 +332,7 @@ class MyProblem(Problem):
         FileGen.gmsh_file(ngen,i,path,dv1,dv2,AoA,optimisation)
         # eval.sh file
         FileGen.eval_file(ngen,i,path,optimisation,AoA,GPUs)
-        # FileGen.eval_file_2(ngen,i,path,optimisation,AoA,GPUs)
+        FileGen.eval_file_second(ngen,i,path,optimisation,AoA,GPUs)
 
     def write_DVs_file(self,path,dv1,dv2):
         f = open("%s/DVs.csv" %path, "w")
