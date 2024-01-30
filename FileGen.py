@@ -238,15 +238,10 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
     f.write('#!/bin/bash'+'\n') 
     f.write(''+'\n') 
     f.write('source /home/ry619/.bashrc'+'\n') 
-    # f.write('source /users/lcarosro/v2pyfrv12/bin/activate'+'\n') 
     f.write(''+'\n') 
     f.write('printf "\\n- GMSH"'+'\n') 
     f.write('printf "\\nGenerating mesh \\n"'+'\n') 
     if optimisation == "2D":
-        # f.write('/users/lcarosro/dependencies/gmsh/build/gmsh '+str(AoA)+
-        #         'AoA-gen-'+str(n)+'-idv-'+str(i)+'.geo -2 '+#str(AoA)+
-        #         #'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '+
-        #         '&> gmsh.log'+'\n') 
 
         f.write('gmsh -2 -o '+str(AoA)+
                 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '+str(AoA)+
@@ -278,7 +273,23 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
     if optimisation == "3D":
         f.write('sbatch p_job.slurm'+'\n')
     f.close()
+
+# Second Evaluation
+def eval_file_second(n,i,idvpath,optimisation,AoA,GPUs):
+    f=open('%s/eval2.sh' %idvpath,'w')
+    f.write('#!/bin/bash'+'\n') 
+    f.write(''+'\n') 
+    f.write('source /home/ry619/.bashrc'+'\n') 
+    f.write(''+'\n') 
     
+    if optimisation == "3D":
+        f.write('pyfr partition '+str(GPUs)+' '+str(AoA)+
+        'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm .'+'\n') 
+    f.write('printf "\\n- Job submission\\n"'+'\n') 
+
+    if optimisation == "2D":
+        f.write('pyfr run -b openmp -p '+str(AoA)+
+                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm Re6000M03.ini')
 # #Second Evaluation
 
 # def eval_file_2(n,i,idvpath,optimisation,AoA,GPUs):
