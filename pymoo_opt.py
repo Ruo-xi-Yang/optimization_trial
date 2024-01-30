@@ -565,7 +565,7 @@ class MyProblem(Problem):
         DV.close
         f=open('%s/%s' %(parent_dir,output_opt_file),'a')
         print("\n- Individual "+str(i), file=f)
-        print("Cl = "+str("%.3f" %cl_total)+", Cd = "+str("%.3f" %cd-total), file=f)
+        print("Cl = "+str("%.3f" %cl_total)+", Cd = "+str("%.3f" %cd_total), file=f)
         f.close()
         forces = [-cl_total,cd_total]
         return forces
