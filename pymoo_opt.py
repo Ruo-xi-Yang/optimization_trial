@@ -347,7 +347,7 @@ class MyProblem(Problem):
         f.close()
         os.chmod("%s/eval.sh" %path, 509)
         f=open('%s/%s' %(parent_dir,output_opt_file),'a')
-        subprocess.call("cd %s && ./eval.sh" %(path), shell=True, stdout=f)
+        subprocess.run("cd %s && ./eval.sh" %(path), shell=True, stdout=f, check = True)
         f.close()
         
     def reset_running(self,X):
