@@ -539,9 +539,9 @@ class MyProblem(Problem):
                         continue    
                     if optimisation == "2D":
                         clvalues_2.append((float(linesplit[2])+float(linesplit[4]))
-                                         /(q_inf*S))
+                                         /(q_inf_2*S))
                         cdvalues_2.append((float(linesplit[1])+float(linesplit[3]))
-                                         /(q_inf*S))
+                                         /(q_inf_2*S))
                     if optimisation == "3D":
                         clvalues_2.append((float(linesplit[2])+float(linesplit[5]))
                                          /(q_inf*S))
