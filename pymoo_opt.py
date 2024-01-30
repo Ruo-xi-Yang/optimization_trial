@@ -546,7 +546,7 @@ class MyProblem(Problem):
                                          /(q_inf*S))
                         cdvalues_2.append((float(linesplit[1])+float(linesplit[4]))
                                          /(q_inf*S))
-                if len(clvalues)>0:
+                if len(clvalues_2)>0:
                     cl_2 = sum(clvalues_2)/float(len(clvalues_2))
                     cd_2 = sum(cdvalues_2)/float(len(cdvalues_2))
                 else:
