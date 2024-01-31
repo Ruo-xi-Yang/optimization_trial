@@ -137,7 +137,8 @@ if optimisation == "3D":
 
 main_ini_file = "Re3000M015.ini"        # PyFR initial file name
 second_ini_file = "Re6000M03.ini"       # Second initial file with doubled v
-pert_ini_file = "Perturbation.ini"      # PyFR perturbation file name
+pert_ini_file = "Perturbation_Re3000.ini"      # PyFR perturbation file name
+sec_pert_ini_file = "Perturbation_Re6000.ini"  # Second perturbation file name
 
 # DESIGN SPACE BOUNDS ------------------------------------------------------
 
@@ -322,12 +323,18 @@ class MyProblem(Problem):
         FileGen.plugin_soln_avg(path,optimisation,second_ini_file,avg_from,tend,ngen,i)
         FileGen.plugin_sampler(path,optimisation,second_ini_file)
         FileGen.boundary_conditions(path,optimisation,second_ini_file,0,u_inf_2,rho_inf,p_inf)
-        # perturbation ini file
+        # first perturbation ini file
         FileGen.ini_file(path,pert_ini_file,gamma,mu,Pr,order,tstart,tperturb,dt)
         FileGen.plugin_airfoilforces(path,pert_ini_file)
         FileGen.plugin_soln_writer(path,pert_ini_file,tperturb,ngen,i)
         FileGen.plugin_sampler(path,optimisation,pert_ini_file)
         FileGen.boundary_conditions(path,optimisation,pert_ini_file,1,u_inf,rho_inf,p_inf)
+        #second perturbation file 
+        FileGen.ini_file(path,sec_pert_ini_file,gamma,mu,Pr,order,tstart,tperturb,dt)
+        FileGen.plugin_airfoilforces(path,sec_pert_ini_file)
+        FileGen.plugin_soln_writer(path,sec_pert_ini_file,tperturb,ngen,i)
+        FileGen.plugin_sampler(path,optimisation,sec_pert_ini_file)
+        FileGen.boundary_conditions(path,optimisation,sec_pert_ini_file,1,u_inf_2,rho_inf,p_inf)
         # gmsh geo file
         FileGen.gmsh_file(ngen,i,path,dv1,dv2,AoA,optimisation)
         # eval.sh file
