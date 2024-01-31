@@ -268,12 +268,12 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
         'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm .'+'\n') 
     f.write('printf "\\n- Job submission\\n"'+'\n') 
     if optimisation == "2D":
-        f.write('pyfr run -b openmp -p '+str(AoA)+
-            'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm Perturbation_Re3000.ini')
-        # f.write('pyfr restart -b openmp -p '+str(AoA)+'AoA-gen-'
-        #     +str(n)+'-idv-'+str(i)+'.pyfrm '+p_sol_file+' Re3000M015.ini')
         # f.write('pyfr run -b openmp -p '+str(AoA)+
-        #         'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm Re3000M015.ini')
+        #     'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm Perturbation_Re3000.ini')
+        # # f.write('pyfr restart -b openmp -p '+str(AoA)+'AoA-gen-'
+        # #     +str(n)+'-idv-'+str(i)+'.pyfrm '+p_sol_file+' Re3000M015.ini')
+        f.write('pyfr run -b openmp -p '+str(AoA)+
+                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm Re3000M015.ini')
     if optimisation == "3D":
         f.write('sbatch p_job.slurm'+'\n')
     f.close()
