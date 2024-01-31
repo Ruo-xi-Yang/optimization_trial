@@ -58,7 +58,7 @@ eta_c = 20                           # crossover eta
 
 population = 2                      # population size
 offspring = 1                       # number of offspring
-n_max_gen = 5                        # number of generations
+n_max_gen = 10                        # number of generations
 
 global ngen
 restart = "No"                       # restart optimisation from checkpoint
@@ -498,7 +498,7 @@ class MyProblem(Problem):
     def data_extract(self,i,dv1,dv2):        
         output_forces = 10
         # not_wanted_lines = avg_from/(dt*output_forces)
-        not_wanted_lines = 5000
+        not_wanted_lines = 3580
         q_inf = 0.5*rho_inf*u_inf**2
         q_inf_2 = 0.5*rho_inf*u_inf_2**2
         S = c*b
