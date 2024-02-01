@@ -353,12 +353,11 @@ class MyProblem(Problem):
         print("--------------------", file=f)
         f.close()
         os.chmod("%s/eval.sh" %path, 509)
-        
         # add permission to eval2.sh
-        os.chmod("%s/eval2.sh" %path, 509)
+        #os.chmod("%s/eval2.sh" %path, 509)
         f=open('%s/%s' %(parent_dir,output_opt_file),'a')
         subprocess.run("cd %s && ./eval.sh" %(path), shell=True, stdout=f, check = True)
-        subprocess.run("cd %s && ./eval2.sh" %(path), shell=True, stdout=f, check = True)
+        #subprocess.run("cd %s && ./eval2.sh" %(path), shell=True, stdout=f, check = True)
         f.close()
         
     def reset_running(self,X):
@@ -537,55 +536,55 @@ class MyProblem(Problem):
         else:
             cl = 100.0; cd = 100.0
             
-        #Compute cl and cd for the second simulation
-        if os.path.isfile('%s/airfoil-forces-2.csv' %idv_path):
-            with open('%s/airfoil-forces-2.csv' %idv_path, 'r') as OFV:      
-                for line_number, line in enumerate(OFV, 1):
-                    if line_number <= not_wanted_lines:
-                        continue
-                    linesplit = line.strip().split(",")  
-                    if not linesplit:  # empty
-                        continue    
-                    if optimisation == "2D":
-                        clvalues_2.append((float(linesplit[2])+float(linesplit[4]))
-                                         /(q_inf_2*S))
-                        cdvalues_2.append((float(linesplit[1])+float(linesplit[3]))
-                                         /(q_inf_2*S))
-                    if optimisation == "3D":
-                        clvalues_2.append((float(linesplit[2])+float(linesplit[5]))
-                                         /(q_inf*S))
-                        cdvalues_2.append((float(linesplit[1])+float(linesplit[4]))
-                                         /(q_inf*S))
-                if len(clvalues_2)>0:
-                    cl_2 = sum(clvalues_2)/float(len(clvalues_2))
-                    cd_2 = sum(cdvalues_2)/float(len(cdvalues_2))
-                else:
-                    cl_2 = 100.0; cd_2 = 100.0
-            OFV.close
-        else:
-            cl_2 = 100.0; cd_2 = 100.0
+        # #Compute cl and cd for the second simulation
+        # if os.path.isfile('%s/airfoil-forces-2.csv' %idv_path):
+        #     with open('%s/airfoil-forces-2.csv' %idv_path, 'r') as OFV:      
+        #         for line_number, line in enumerate(OFV, 1):
+        #             if line_number <= not_wanted_lines:
+        #                 continue
+        #             linesplit = line.strip().split(",")  
+        #             if not linesplit:  # empty
+        #                 continue    
+        #             if optimisation == "2D":
+        #                 clvalues_2.append((float(linesplit[2])+float(linesplit[4]))
+        #                                  /(q_inf_2*S))
+        #                 cdvalues_2.append((float(linesplit[1])+float(linesplit[3]))
+        #                                  /(q_inf_2*S))
+        #             if optimisation == "3D":
+        #                 clvalues_2.append((float(linesplit[2])+float(linesplit[5]))
+        #                                  /(q_inf*S))
+        #                 cdvalues_2.append((float(linesplit[1])+float(linesplit[4]))
+        #                                  /(q_inf*S))
+        #         if len(clvalues_2)>0:
+        #             cl_2 = sum(clvalues_2)/float(len(clvalues_2))
+        #             cd_2 = sum(cdvalues_2)/float(len(cdvalues_2))
+        #         else:
+        #             cl_2 = 100.0; cd_2 = 100.0
+        #     OFV.close
+        # else:
+        #     cl_2 = 100.0; cd_2 = 100.0
             
-        cl_total = (cl + cl_2)/2
-        cd_total = (cd + cd_2)/2
+        # cl_total = (cl + cl_2)/2
+        # cd_total = (cd + cd_2)/2
         
          
-        # with open('%s/cl_cd_idv.csv' %idv_path, 'w') as DV:
-        #     DV.write(str(cl_2)+','+str(cd_2))
-        # DV.close
-        # f=open('%s/%s' %(parent_dir,output_opt_file),'a')
-        # print("\n- Individual "+str(i), file=f)
-        # print("Cl = "+str("%.3f" %cl_2)+", Cd = "+str("%.3f" %cd_2), file=f)
-        # f.close()
-        # forces = [-cl_2,cd_2]
-
         with open('%s/cl_cd_idv.csv' %idv_path, 'w') as DV:
-            DV.write(str(cl_total)+','+str(cd_total))
+            DV.write(str(cl)+','+str(cd))
         DV.close
         f=open('%s/%s' %(parent_dir,output_opt_file),'a')
         print("\n- Individual "+str(i), file=f)
-        print("Cl = "+str("%.3f" %cl_total)+", Cd = "+str("%.3f" %cd_total), file=f)
+        print("Cl = "+str("%.3f" %cl)+", Cd = "+str("%.3f" %cd), file=f)
         f.close()
-        forces = [-cl_total,cd_total]
+        forces = [-cl,cd]
+
+        # with open('%s/cl_cd_idv.csv' %idv_path, 'w') as DV:
+        #     DV.write(str(cl_total)+','+str(cd_total))
+        # DV.close
+        # f=open('%s/%s' %(parent_dir,output_opt_file),'a')
+        # print("\n- Individual "+str(i), file=f)
+        # print("Cl = "+str("%.3f" %cl_total)+", Cd = "+str("%.3f" %cd_total), file=f)
+        # f.close()
+        # forces = [-cl_total,cd_total]
         return forces
 
     def offspring_to_file(self,i,ngen,dv1,dv2,of1,of2):
