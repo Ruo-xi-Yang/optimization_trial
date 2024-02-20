@@ -37,7 +37,7 @@ import FileGen
 # OPTIMISATION PARAMETERS -----------------------------------------------------
 
 output_opt_file = "1st_2D_output.txt"
-parent_dir = '/home/ry619/optimization/optimization_trial'
+parent_dir = '/share/data/ruoxi/FYP/Optimization_1/optimization_trial'
 optimisation = "2D"                  #"2D", "3D"
 
 DVs = 2                              # number of Design Variables
