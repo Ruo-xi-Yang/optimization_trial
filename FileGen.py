@@ -15,7 +15,8 @@ def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_so
     s.write('#$ -l v100'+'\n')
 
     s.write('source /home/ruoxi/.bashrc'+'\n')
-    s.write('export LD_LIBRARY_PATH='/usr/local/cuda-11.7/lib64':$LD_LIBRARY_PATH'+'\n')
+    #s.write('export LD_LIBRARY_PATH='/usr/local/cuda-11.7/lib64':$LD_LIBRARY_PATH'+'\n')
+    s.write("export LD_LIBRARY_PATH='/usr/local/cuda-11.7/lib64':$LD_LIBRARY_PATH\n")
     s.write('export LIBRARY_PATH='/usr/local/cuda-11.7/include':$LIBRARY_PATH'+'\n')
     s.write('export PATH='/usr/local/cuda-11.7/bin':$PATH'+'\n')
     s.write('module load rocks-openmpi'+'\n')
