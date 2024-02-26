@@ -6,7 +6,7 @@ import os
 # SUBMISSION FILE -----------------------------------------------------------------------------------
 
 def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_sol_file,t,opt):
-    s=open('%s/%sjob.sub' %(idvpath,t),'w')
+    s=open('job.sub','w')
     s.write('#!/bin/bash -l'+'\n')
     s.write(#$ -N testcase')
     s.write(#$ -wd /share/data/ruoxi/FYP/Optimization_1/optimization_trial)
@@ -22,8 +22,7 @@ def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_so
 
     s.write(source /home/ruoxi/PyFR-develop/pyfr-develop/bin/activate)
 
-    s.write(mpiexec -n 1 pyfr -p run -b cuda 12AoA-gen-1-idv-0.pyfrm Re3000M015.ini)
-        -p pyfr run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+main_ini_file+'\n')
+    s.write(mpiexec -n 1 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+main_ini_file+'\n')
         
         
 
@@ -257,7 +256,7 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
     f=open('%s/eval.sh' %idvpath,'w')
     f.write('#!/bin/bash'+'\n') 
     f.write(''+'\n') 
-    f.write('source /home/ry619/.bashrc'+'\n') 
+    f.write('source /home/ruoxi/.bashrc'+'\n') 
     f.write(''+'\n') 
     f.write('printf "\\n- GMSH"'+'\n') 
     f.write('printf "\\nGenerating mesh \\n"'+'\n') 
@@ -292,8 +291,7 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
         #     'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm Perturbation_Re3000.ini')
         # # f.write('pyfr restart -b openmp -p '+str(AoA)+'AoA-gen-'
         # #     +str(n)+'-idv-'+str(i)+'.pyfrm '+p_sol_file+' Re3000M015.ini')
-        f.write('pyfr run -b openmp -p '+str(AoA)+
-                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm Re3000M015.ini')
+        f.write('qsub job.sub'+'\n')
     if optimisation == "3D":
         f.write('sbatch p_job.slurm'+'\n')
     f.close()
