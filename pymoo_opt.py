@@ -221,7 +221,7 @@ class MyProblem(Problem):
                 self.run_evaluation(i,idv_path)
                 i += 1
             # RUNNING --------------------------------------------------
-            (running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
+           # (running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
             if optimisation == "2D":
                 sleep_for(30)
             if (optimisation == "3D" and run_p_sep):
@@ -258,7 +258,7 @@ class MyProblem(Problem):
                 else:
                     self.print_state(running[i],finished[i],i)
                 i = i+1        
-            #(running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
+            (running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
             self.while_loop_check(finished,waitingtime1,running,waitingtime2,sorted_population,timebreak1,timebreak2,timeout1,timeout2,tend,while1broken,while2broken)
         if not (ngen == evaluated_gen and initialseeding == "evalPOP"):
             # POST-PROCESSING --------------------------------------------------
