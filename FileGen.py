@@ -258,6 +258,7 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
     f.write('#!/bin/bash'+'\n') 
     f.write(''+'\n') 
     f.write('source /home/ruoxi/.bashrc'+'\n') 
+    f.write('source /home/ruoxi/PyFR-develop/pyfr-develop/bin/activate'+'\n')
     f.write(''+'\n') 
     f.write('printf "\\n- GMSH"'+'\n') 
     f.write('printf "\\nGenerating mesh \\n"'+'\n') 
