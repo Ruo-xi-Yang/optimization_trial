@@ -36,7 +36,7 @@ import FileGen
 
 # OPTIMISATION PARAMETERS -----------------------------------------------------
 
-output_opt_file = "1st_2D_output.txt"
+output_opt_file = "progress.txt"
 parent_dir = '/share/data/ruoxi/FYP/Optimization_1/optimization_trial'
 optimisation = "2D"                  #"2D", "3D"
 
