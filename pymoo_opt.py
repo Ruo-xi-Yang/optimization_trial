@@ -149,7 +149,7 @@ class CheckDesignSpaceBounds(Repair):
         # Z = pop.get("X")
         Z = pop
         f=open('%s/%s' %(parent_dir,output_opt_file),'a')
-        # print("\n\n------------------------", file=f)
+        print("\n\n------------------------", file=f)
         print("    Checking bounds", file=f)
         print("------------------------\n", file=f)
         for i in range(len(Z)):
