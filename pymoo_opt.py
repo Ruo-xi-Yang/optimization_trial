@@ -258,7 +258,7 @@ class MyProblem(Problem):
                 else:
                     self.print_state(running[i],finished[i],i)
                 i = i+1        
-            (running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
+            #(running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
             self.while_loop_check(finished,waitingtime1,running,waitingtime2,sorted_population,timebreak1,timebreak2,timeout1,timeout2,tend,while1broken,while2broken)
         if not (ngen == evaluated_gen and initialseeding == "evalPOP"):
             # POST-PROCESSING --------------------------------------------------
@@ -377,7 +377,7 @@ class MyProblem(Problem):
                 i = 0
                 for row in sorted_population:
                     idv_path = get_idv_dir(i,row[0],row[1],ngen)
-                    last_sol_file = "gen-%s-idv-%s_%s.00.pyfrs" %(ngen,i,tfinish)
+                    last_sol_file = "gen-%s-idv-%s_%s.00.pyfrs" %(ngen,i,tfinish-5)
                     sol_path = os.path.join(idv_path, last_sol_file)
                     outputfile = self.check_for_files(idv_path)
                     if (running[i]==True and finished[i]==False): 
