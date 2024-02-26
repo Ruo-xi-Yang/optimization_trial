@@ -223,6 +223,8 @@ class MyProblem(Problem):
             # RUNNING --------------------------------------------------
             #(running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
             if optimisation == "2D":
+                running = np.full((len(X), 1), False, dtype=bool)
+                finished = np.full((len(X), 1), False, dtype=bool)
                 sleep_for(30)
             if (optimisation == "3D" and run_p_sep):
                 #running = np.full((len(X), 1), False, dtype=bool)
@@ -244,7 +246,7 @@ class MyProblem(Problem):
                     i += 1
             i = 0
             for row in sorted_population:
-                (running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
+                #(running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
                 idv_path = get_idv_dir(i,row[0],row[1],ngen)
                 last_sol_file = "gen-%s-idv-%s_%s.00.pyfrs" %(ngen,i,tend)
                 sol_path = os.path.join(idv_path, last_sol_file)
@@ -260,7 +262,7 @@ class MyProblem(Problem):
                     self.print_state(running[i],finished[i],i)
                 i = i+1        
             self.while_loop_check(finished,waitingtime1,running,waitingtime2,sorted_population,timebreak1,timebreak2,timeout1,timeout2,tend,while1broken,while2broken)
-            (running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
+            #(running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
         if not (ngen == evaluated_gen and initialseeding == "evalPOP"):
             # POST-PROCESSING --------------------------------------------------
             sleep_for(30)
