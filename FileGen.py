@@ -263,7 +263,7 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
     f.write('printf "\\nGenerating mesh \\n"'+'\n') 
     if optimisation == "2D":
 
-        f.write('gmsh -2 -o '+str(AoA)+
+        f.write('/share/data/ruoxi/Dependencies/GMSH/GMSH/bin/gmsh -2 -o '+str(AoA)+
                 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '+str(AoA)+
                 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.geo '+'&> gmsh.log'+'\n') 
         
