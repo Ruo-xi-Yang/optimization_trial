@@ -14,15 +14,15 @@ def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_so
     s.write(#$ -pe mpi 1)
     s.write(#$ -l v100)
 
-    s.write(source /home/ruoxi/.bashrc)
-    s.write(export LD_LIBRARY_PATH='/usr/local/cuda-11.7/lib64':$LD_LIBRARY_PATH)
-    s.write(export LIBRARY_PATH='/usr/local/cuda-11.7/include':$LIBRARY_PATH)
-    s.write(export PATH='/usr/local/cuda-11.7/bin':$PATH)
-    s.write(module load rocks-openmpi)
+    s.write('source /home/ruoxi/.bashrc')
+    s.write('export LD_LIBRARY_PATH='/usr/local/cuda-11.7/lib64':$LD_LIBRARY_PATH')
+    s.write('export LIBRARY_PATH='/usr/local/cuda-11.7/include':$LIBRARY_PATH')
+    s.write('export PATH='/usr/local/cuda-11.7/bin':$PATH')
+    s.write('module load rocks-openmpi')
 
-    s.write(source /home/ruoxi/PyFR-develop/pyfr-develop/bin/activate)
+    s.write('source /home/ruoxi/PyFR-develop/pyfr-develop/bin/activate')
 
-    s.write(mpiexec -n 1 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+main_ini_file+'\n')
+    s.write('mpiexec -n 1 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+main_ini_file+'\n')
         
         
 
