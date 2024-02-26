@@ -6,7 +6,7 @@ import os
 # SUBMISSION FILE -----------------------------------------------------------------------------------
 
 def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_sol_file,t,opt):
-    s=open('job.sub','w')
+    s=open('%s/job.sub' %(idvpath),'w')
     s.write('#!/bin/bash -l'+'\n')
     s.write(#$ -N testcase')
     s.write(#$ -wd /share/data/ruoxi/FYP/Optimization_1/optimization_trial)
