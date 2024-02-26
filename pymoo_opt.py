@@ -221,7 +221,7 @@ class MyProblem(Problem):
                 self.run_evaluation(i,idv_path)
                 i += 1
             # RUNNING --------------------------------------------------
-            #(running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
+            (running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
             if optimisation == "2D":
                 sleep_for(30)
             if (optimisation == "3D" and run_p_sep):
