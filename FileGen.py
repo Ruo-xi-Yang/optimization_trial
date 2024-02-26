@@ -282,7 +282,7 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
         f.write('sed -n \'169p\' gmsh.log'+'\n') 
     f.write('printf "\\n- PyFR"'+'\n') 
     f.write('printf "\\nImporting gmsh mesh to pyfrm\\n"'+'\n') 
-    f.write('pyfr import '+str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '
+    f.write('home/ruoxi/PyFR-DEVELOP/pyfr-develop1/bin/pyfr import '+str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '
             +str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm'+'\n') 
     if optimisation == "3D":
         f.write('pyfr partition '+str(GPUs)+' '+str(AoA)+
