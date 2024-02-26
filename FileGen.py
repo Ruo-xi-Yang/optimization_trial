@@ -136,6 +136,7 @@ def plugin_airfoilforces(idvpath,ini_file):
     f.write('nsteps = 10'+'\n') 
     f.write('file = airfoil-forces.csv'+'\n') 
     f.write('header = true'+'\n') 
+    f.write('quad-deg = 1'+'\n') 
     f.write(''+'\n') 
     f.close()
     
