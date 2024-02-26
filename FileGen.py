@@ -270,19 +270,9 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
         
         f.write('sed -n \'45p\' gmsh.log'+'\n') 
         f.write('sed -n \'46p\' gmsh.log'+'\n')
-    if optimisation == "3D":
-        f.write('/users/lcarosro/dependencies/gmsh/build/gmsh '+str(AoA)+
-                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.geo -3 '+str(AoA)+
-                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '+'&> gmsh.log'+'\n')  
-        f.write('sed -n \'164p\' gmsh.log'+'\n') 
-        f.write('sed -n \'165p\' gmsh.log'+'\n') 
-        f.write('sed -n \'166p\' gmsh.log'+'\n') 
-        f.write('sed -n \'167p\' gmsh.log'+'\n') 
-        f.write('sed -n \'168p\' gmsh.log'+'\n') 
-        f.write('sed -n \'169p\' gmsh.log'+'\n') 
     f.write('printf "\\n- PyFR"'+'\n') 
     f.write('printf "\\nImporting gmsh mesh to pyfrm\\n"'+'\n') 
-    f.write('home/ruoxi/PyFR-DEVELOP/pyfr-develop1/bin/pyfr import '+str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '
+    f.write('/home/ruoxi/PyFR-DEVELOP/pyfr-develop1/bin/pyfr import '+str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '
             +str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm'+'\n') 
     if optimisation == "3D":
         f.write('pyfr partition '+str(GPUs)+' '+str(AoA)+
