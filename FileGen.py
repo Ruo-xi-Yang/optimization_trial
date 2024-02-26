@@ -9,7 +9,7 @@ def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_so
     s=open('%s/job.sub' %(idvpath),'w')
     s.write('#!/bin/bash'+'\n')
     s.write('#$ -N testcase'+'\n')
-    s.write('#$ -wd /share/data/ruoxi/FYP/Optimization_1/optimization_trial'+'\n')
+    s.write('#$ -wd %s\n' % idvpath)
     s.write('#$ -j y'+'\n')
     s.write('#$ -pe mpi 1'+'\n')
     s.write('#$ -l v100'+'\n')
