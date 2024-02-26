@@ -21,7 +21,7 @@ def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_so
     s.write("export PATH='/usr/local/cuda-11.7/bin':$PATH\n")
     s.write('module load rocks-openmpi'+'\n')
 
-    s.write('source /home/ruoxi/PyFR-develop/pyfr-develop/bin/activate'+'\n')
+    s.write('source /home/ruoxi/PyFR-DEVELOP/pyfr-develop1/bin/activate'+'\n')
 
     s.write('mpiexec -n 1 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+main_ini_file+'\n')
         
