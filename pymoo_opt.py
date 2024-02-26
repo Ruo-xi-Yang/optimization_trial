@@ -244,6 +244,7 @@ class MyProblem(Problem):
                     i += 1
             i = 0
             for row in sorted_population:
+                (running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
                 idv_path = get_idv_dir(i,row[0],row[1],ngen)
                 last_sol_file = "gen-%s-idv-%s_%s.00.pyfrs" %(ngen,i,tend)
                 sol_path = os.path.join(idv_path, last_sol_file)
