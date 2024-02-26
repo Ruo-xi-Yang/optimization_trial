@@ -8,19 +8,19 @@ import os
 def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_sol_file,t,opt):
     s=open('%s/job.sub' %(idvpath),'w')
     s.write('#!/bin/bash -l'+'\n')
-    s.write(#$ -N testcase')
-    s.write(#$ -wd /share/data/ruoxi/FYP/Optimization_1/optimization_trial)
-    s.write(#$ -j y)
-    s.write(#$ -pe mpi 1)
-    s.write(#$ -l v100)
+    s.write('#$ -N testcase'+'\n')
+    s.write('#$ -wd /share/data/ruoxi/FYP/Optimization_1/optimization_trial'+'\n')
+    s.write('#$ -j y'+'\n')
+    s.write('#$ -pe mpi 1'+'\n')
+    s.write('#$ -l v100'+'\n')
 
-    s.write('source /home/ruoxi/.bashrc')
-    s.write('export LD_LIBRARY_PATH='/usr/local/cuda-11.7/lib64':$LD_LIBRARY_PATH')
-    s.write('export LIBRARY_PATH='/usr/local/cuda-11.7/include':$LIBRARY_PATH')
-    s.write('export PATH='/usr/local/cuda-11.7/bin':$PATH')
-    s.write('module load rocks-openmpi')
+    s.write('source /home/ruoxi/.bashrc'+'\n')
+    s.write('export LD_LIBRARY_PATH='/usr/local/cuda-11.7/lib64':$LD_LIBRARY_PATH'+'\n')
+    s.write('export LIBRARY_PATH='/usr/local/cuda-11.7/include':$LIBRARY_PATH'+'\n')
+    s.write('export PATH='/usr/local/cuda-11.7/bin':$PATH'+'\n')
+    s.write('module load rocks-openmpi'+'\n')
 
-    s.write('source /home/ruoxi/PyFR-develop/pyfr-develop/bin/activate')
+    s.write('source /home/ruoxi/PyFR-develop/pyfr-develop/bin/activate'+'\n')
 
     s.write('mpiexec -n 1 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+main_ini_file+'\n')
         
