@@ -259,7 +259,7 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
     f.write('#!/bin/bash'+'\n') 
     f.write(''+'\n') 
     f.write('source /home/ruoxi/.bashrc'+'\n') 
-    f.write('source /home/ruoxi/PyFR-develop/pyfr-develop/bin/activate'+'\n')
+    f.write('source /home/ruoxi/PyFR-15/pyfrv15/bin/activate'+'\n')
     f.write(''+'\n') 
     f.write('printf "\\n- GMSH"'+'\n') 
     f.write('printf "\\nGenerating mesh \\n"'+'\n') 
@@ -276,7 +276,7 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
     f.write('/home/ruoxi/PyFR-15/pyfrv15/bin/pyfr import '+str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '
             +str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm'+'\n') 
     #f.write('/home/ruoxi/PyFR-15/pyfrv15/bin/pyfr partition 8 '+str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm'+'\n') 
-    f.write('pyfr partition 8 ' + str(AoA) +'AoA-gen-' + str(n) + '-idv-' + str(i) + '.pyfrm ' + '%s\n' % idvpath)
+    f.write('/home/ruoxi/PyFR-15/pyfrv15/bin/pyfr partition 8 ' + str(AoA) +'AoA-gen-' + str(n) + '-idv-' + str(i) + '.pyfrm ' + '%s\n' % idvpath)
 
     
     if optimisation == "3D":
