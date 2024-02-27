@@ -260,6 +260,7 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
     f.write(''+'\n') 
     f.write('source /home/ruoxi/.bashrc'+'\n') 
     f.write('source /home/ruoxi/PyFR-15/pyfrv15/bin/activate'+'\n')
+    f.write("export LD_LIBRARY_PATH='/share/data/ruoxi/Dependencies/metis-5.1.0/lib':$LD_LIBRARY_PATH\n")
     f.write(''+'\n') 
     f.write('printf "\\n- GMSH"'+'\n') 
     f.write('printf "\\nGenerating mesh \\n"'+'\n') 
