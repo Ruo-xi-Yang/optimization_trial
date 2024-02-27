@@ -366,14 +366,14 @@ class MyProblem(Problem):
         #subprocess.run("cd %s && ./eval2.sh" %(path), shell=True, stdout=f, check = True)
         f.close()
         
-    def reset_running(self,X):
-        running = np.full((len(X), 1), False, dtype=bool)
-        finished = np.full((len(X), 1), False, dtype=bool)
-        while1broken = False
-        while2broken = False
-        timebreak1 = time.time() + timeout1
-        timebreak2 = time.time() + timeout2
-        return (running,finished,while1broken,while2broken,timebreak1,timebreak2)
+    # def reset_running(self,X):
+    #     running = np.full((len(X), 1), False, dtype=bool)
+    #     finished = np.full((len(X), 1), False, dtype=bool)
+    #     while1broken = False
+    #     while2broken = False
+    #     timebreak1 = time.time() + timeout1
+    #     timebreak2 = time.time() + timeout2
+    #     return (running,finished,while1broken,while2broken,timebreak1,timebreak2)
     
     def while_loop_check(self,finished,waitingtime1,running,waitingtime2,sorted_population,timebreak1,timebreak2,timeout1,timeout2,tfinish,while1broken,while2broken):
         while False in finished:
