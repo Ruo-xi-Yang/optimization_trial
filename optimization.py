@@ -73,7 +73,7 @@ evaluated_path = "gen_%s/optimum_gen%s.csv" %(evaluated_gen,evaluated_gen)
 
 # PROBLEM DEFINITION -----------------------------------------------------
 
-order = 4                           # polynomial order
+order = 1                           # polynomial order
 AoA = 12                             # Angle of attack
 c = 1                                # chord length
 
