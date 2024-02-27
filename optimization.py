@@ -223,8 +223,8 @@ class MyProblem(Problem):
             # RUNNING --------------------------------------------------
             #(running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
             if optimisation == "2D":
-                running = np.full((len(X), 1), dtype=bool)
-                finished = np.full((len(X), 1), dtype=bool)
+                running = np.empty((len(X), 1), dtype=bool)
+                finished = np.empty((len(X), 1), dtype=bool)
                 while1broken = False
                 while2broken = False
                 timebreak1 = time.time() + timeout1
