@@ -58,7 +58,7 @@ eta_c = 20                           # crossover eta
 
 population = 2                   # population size
 offspring = 1                    # number of offspring
-n_max_gen = 5                       # number of generations
+n_max_gen = 10                       # number of generations
 
 global ngen
 restart = "No"                       # restart optimisation from checkpoint
@@ -73,7 +73,7 @@ evaluated_path = "gen_%s/optimum_gen%s.csv" %(evaluated_gen,evaluated_gen)
 
 # PROBLEM DEFINITION -----------------------------------------------------
 
-order = 4                           # polynomial order
+order = 1                           # polynomial order
 AoA = 12                             # Angle of attack
 c = 1                                # chord length
 
@@ -93,15 +93,15 @@ mu = c*u_inf*rho_inf/Re               # dynamic viscosity mu = 0.00033333333
 
 if optimisation == "2D":
     b = 1                            # span length
-    dt = 0.00007                   # time step
+    dt = 0.00014                 # time step
     tstart = 0                       # simulation start time
     tperturb = 5                     # sinusoidal perturbation time
     avg_from = 5                  # extract averages from
-    tend = 50                      # total convective times
+    tend = 10                      # total convective times
     GPUs = 1                         # number of GPUs for parallelisation
     wctime = '0-03:00:00'            # wall clock time for each individual to run
-    waitingtime1 = 32*60             # waiting time while all cases are running
-    waitingtime2 = 32*60             # waiting time for checking if cases are running
+    waitingtime1 = 45*60             # waiting time while all cases are running
+    waitingtime2 = 45*60             # waiting time for checking if cases are running
     timeout1 = 400*waitingtime1      # exit the waiting loop for running cases
     timeout2 = 200*waitingtime2      # exit the waiting loop for queueing cases
 
@@ -221,7 +221,7 @@ class MyProblem(Problem):
                 self.run_evaluation(i,idv_path)
                 i += 1
             # RUNNING --------------------------------------------------
-            #(running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
+            (running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
             if optimisation == "2D":
                 # running = np.empty((len(X), 1), dtype=bool)
                 # finished = np.empty((len(X), 1), dtype=bool)
@@ -250,12 +250,12 @@ class MyProblem(Problem):
             #         i += 1
             i = 0
             for row in sorted_population:
-                running = np.empty((len(X), 1), dtype=bool)
-                finished = np.empty((len(X), 1), dtype=bool)
-                while1broken = False
-                while2broken = False
-                timebreak1 = time.time() + timeout1
-                timebreak2 = time.time() + timeout2
+                # running = np.empty((len(X), 1), dtype=bool)
+                # finished = np.empty((len(X), 1), dtype=bool)
+                # while1broken = False
+                # while2broken = False
+                # timebreak1 = time.time() + timeout1
+                # timebreak2 = time.time() + timeout2
                 
                 idv_path = get_idv_dir(i,row[0],row[1],ngen)
                 last_sol_file = "gen-%s-idv-%s_%s.00.pyfrs" %(ngen,i,tend)
@@ -272,8 +272,8 @@ class MyProblem(Problem):
                     self.print_state(running[i],finished[i],i)
                 #self.while_loop_check(finished,waitingtime1,running,waitingtime2,sorted_population,timebreak1,timebreak2,timeout1,timeout2,tend,while1broken,while2broken)
                 i = i+1
-                self.while_loop_check(finished,waitingtime1,running,waitingtime2,sorted_population,timebreak1,timebreak2,timeout1,timeout2,tend,while1broken,while2broken)
-            # self.while_loop_check(finished,waitingtime1,running,waitingtime2,sorted_population,timebreak1,timebreak2,timeout1,timeout2,tend,while1broken,while2broken)
+                # self.while_loop_check(finished,waitingtime1,running,waitingtime2,sorted_population,timebreak1,timebreak2,timeout1,timeout2,tend,while1broken,while2broken)
+            self.while_loop_check(finished,waitingtime1,running,waitingtime2,sorted_population,timebreak1,timebreak2,timeout1,timeout2,tend,while1broken,while2broken)
             #(running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
         if not (ngen == evaluated_gen and initialseeding == "evalPOP"):
             # POST-PROCESSING --------------------------------------------------
@@ -375,14 +375,14 @@ class MyProblem(Problem):
         #subprocess.run("cd %s && ./eval2.sh" %(path), shell=True, stdout=f, check = True)
         f.close()
         
-    # def reset_running(self,X):
-    #     running = np.full((len(X), 1), False, dtype=bool)
-    #     finished = np.full((len(X), 1), False, dtype=bool)
-    #     while1broken = False
-    #     while2broken = False
-    #     timebreak1 = time.time() + timeout1
-    #     timebreak2 = time.time() + timeout2
-    #     return (running,finished,while1broken,while2broken,timebreak1,timebreak2)
+    def reset_running(self,X):
+        running = np.full((len(X), 1), True, dtype=bool)
+        finished = np.full((len(X), 1), True, dtype=bool)
+        while1broken = False
+        while2broken = False
+        timebreak1 = time.time() + timeout1
+        timebreak2 = time.time() + timeout2
+        return (running,finished,while1broken,while2broken,timebreak1,timebreak2)
     
     def while_loop_check(self,finished,waitingtime1,running,waitingtime2,sorted_population,timebreak1,timebreak2,timeout1,timeout2,tfinish,while1broken,while2broken):
         while False in finished:
