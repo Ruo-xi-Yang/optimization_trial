@@ -262,8 +262,8 @@ class MyProblem(Problem):
                 sol_path = os.path.join(idv_path, last_sol_file)
                 outputfile = self.check_for_files(idv_path)
                 if os.path.isfile(sol_path):
-                    running[i] = False
-                    finished[i] = False
+                    running[i] = True
+                    finished[i] = True
                     self.print_state(running[i],finished[i],i)
                 elif outputfile:
                     running[i] = True
