@@ -221,31 +221,35 @@ class MyProblem(Problem):
                 self.run_evaluation(i,idv_path)
                 i += 1
             # RUNNING --------------------------------------------------
-            (running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
+            #(running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
             if optimisation == "2D":
-                (running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
-                sleep_for(30)
-            if (optimisation == "3D" and run_p_sep):
-                #running = np.full((len(X), 1), False, dtype=bool)
-                #finished = np.full((len(X), 1), False, dtype=bool)
-                #while1broken = False
-                #while2broken = False
+                running = np.full((len(X), 1), False, dtype=bool)
+                finished = np.full((len(X), 1), False, dtype=bool)
+                while1broken = False
+                while2broken = False
                 timebreak1 = time.time() + p_timeout1
                 timebreak2 = time.time() + p_timeout2
-                self.while_loop_check(finished,p_waitingtime1,running,p_waitingtime2,sorted_population,timebreak1,timebreak2,p_timeout1,p_timeout2,tperturb,while1broken,while2broken)
-                i=0
-                for row in sorted_population:
-                    idv_path = get_idv_dir(i,row[0],row[1],ngen)
-                    os.chmod("%s/u_job.slurm" %idv_path, 509)
-                    f=open('%s/%s' %(parent_dir,output_opt_file),'a')
-                    subprocess.call("mv %s/*.out %s/p_output" %(idv_path,idv_path), shell=True, stdout=f)
-                    subprocess.call("cd %s && sbatch u_job.slurm" %(idv_path), shell=True, stdout=f)
-                    f.close()
-                    sleep_for(5)
-                    i += 1
+                sleep_for(30)
+            # if (optimisation == "3D" and run_p_sep):
+            #     #running = np.full((len(X), 1), False, dtype=bool)
+            #     #finished = np.full((len(X), 1), False, dtype=bool)
+            #     #while1broken = False
+            #     #while2broken = False
+            #     timebreak1 = time.time() + p_timeout1
+            #     timebreak2 = time.time() + p_timeout2
+            #     self.while_loop_check(finished,p_waitingtime1,running,p_waitingtime2,sorted_population,timebreak1,timebreak2,p_timeout1,p_timeout2,tperturb,while1broken,while2broken)
+            #     i=0
+            #     for row in sorted_population:
+            #         idv_path = get_idv_dir(i,row[0],row[1],ngen)
+            #         os.chmod("%s/u_job.slurm" %idv_path, 509)
+            #         f=open('%s/%s' %(parent_dir,output_opt_file),'a')
+            #         subprocess.call("mv %s/*.out %s/p_output" %(idv_path,idv_path), shell=True, stdout=f)
+            #         subprocess.call("cd %s && sbatch u_job.slurm" %(idv_path), shell=True, stdout=f)
+            #         f.close()
+            #         sleep_for(5)
+            #         i += 1
             i = 0
             for row in sorted_population:
-                #(running,finished,while1broken,while2broken,timebreak1,timebreak2) = self.reset_running(X)
                 idv_path = get_idv_dir(i,row[0],row[1],ngen)
                 last_sol_file = "gen-%s-idv-%s_%s.00.pyfrs" %(ngen,i,tend)
                 sol_path = os.path.join(idv_path, last_sol_file)
