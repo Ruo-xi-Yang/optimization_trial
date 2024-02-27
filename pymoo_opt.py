@@ -363,8 +363,8 @@ class MyProblem(Problem):
         f.close()
         
     def reset_running(self,X):
-        running = np.full((len(X), 1), True, dtype=bool)
-        finished = np.full((len(X), 1), True, dtype=bool)
+        running = np.full((len(X), 1), False, dtype=bool)
+        finished = np.full((len(X), 1), False, dtype=bool)
         while1broken = False
         while2broken = False
         timebreak1 = time.time() + timeout1
