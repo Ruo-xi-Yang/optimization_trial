@@ -56,9 +56,9 @@ prob_c = 0.2                         # crossover probability
 eta_m = 15                           # mutation eta
 eta_c = 20                           # crossover eta
 
-population = 12                     # population size
-offspring = 6                      # number of offspring
-n_max_gen = 8                        # number of generations
+population = 2                   # population size
+offspring = 1                    # number of offspring
+n_max_gen = 5                       # number of generations
 
 global ngen
 restart = "No"                       # restart optimisation from checkpoint
@@ -93,11 +93,11 @@ mu = c*u_inf*rho_inf/Re               # dynamic viscosity mu = 0.00033333333
 
 if optimisation == "2D":
     b = 1                            # span length
-    dt = 0.00007                   # time step
+    dt = 0.00014                   # time step
     tstart = 0                       # simulation start time
     tperturb = 5                     # sinusoidal perturbation time
-    avg_from = 10                  # extract averages from
-    tend = 50                      # total convective times
+    avg_from = 5                  # extract averages from
+    tend = 10                      # total convective times
     GPUs = 1                         # number of GPUs for parallelisation
     wctime = '0-03:00:00'            # wall clock time for each individual to run
     waitingtime1 = 32*60             # waiting time while all cases are running
