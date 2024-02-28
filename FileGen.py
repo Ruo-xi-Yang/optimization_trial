@@ -24,6 +24,8 @@ def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_so
     s.write('source /home/ruoxi/PyFR-DEVELOP/pyfr-develop1/bin/activate'+'\n')
 
     s.write('mpiexec -n 4 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+main_ini_file+'\n')
+    s.write('mpiexec -n 4 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+second_ini_file+'\n')
+        
         
         
 
@@ -299,17 +301,13 @@ def eval_file_second(n,i,idvpath,optimisation,AoA,GPUs):
     f=open('%s/eval2.sh' %idvpath,'w')
     f.write('#!/bin/bash'+'\n') 
     f.write(''+'\n') 
-    f.write('source /home/ry619/.bashrc'+'\n') 
-    f.write(''+'\n') 
+    f.write('source /home/ruoxi/.bashrc'+'\n') 
+    f.write('source /home/ruoxi/PyFR-15/pyfrv15/bin/activate'+'\n')
+    f.write("export LD_LIBRARY_PATH='/share/data/ruoxi/Dependencies/metis-5.1.0/lib':$LD_LIBRARY_PATH\n")
+    f.write(''+'\n')  
     
-    if optimisation == "3D":
-        f.write('pyfr partition '+str(GPUs)+' '+str(AoA)+
-        'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm .'+'\n') 
-    f.write('printf "\\n- Job submission\\n"'+'\n') 
 
-    if optimisation == "2D":
-        f.write('pyfr run -b openmp -p '+str(AoA)+
-                'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm Re6000M03.ini')
+    
 
     
 # MESH FILE -----------------------------------------------------------------------------------
