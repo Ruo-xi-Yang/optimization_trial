@@ -323,7 +323,7 @@ class MyProblem(Problem):
                                main_ini_file,pert_sol_file,"p",optimisation)
             
         FileGen.cirrus_jobfile(ngen,path,GPUs,wctime,i,dv1,dv2,AoA,pert_ini_file,
-                               main_ini_file,pert_sol_file,"u",optimisation)
+                               main_ini_file,second_ini_file,pert_sol_file,"u",optimisation)
         # main ini file
         FileGen.ini_file(path,main_ini_file,gamma,mu,Pr,order,tstart,tend,dt)
         FileGen.plugin_airfoilforces(path,main_ini_file)
