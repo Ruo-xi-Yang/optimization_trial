@@ -369,10 +369,10 @@ class MyProblem(Problem):
         f.close()
         os.chmod("%s/eval.sh" %path, 509)
         # add permission to eval2.sh
-        os.chmod("%s/eval2.sh" %path, 509)
+        #os.chmod("%s/eval2.sh" %path, 509)
         f=open('%s/%s' %(parent_dir,output_opt_file),'a')
         subprocess.run("cd %s && ./eval.sh" %(path), shell=True, stdout=f, check = True)
-        subprocess.run("cd %s && ./eval2.sh" %(path), shell=True, stdout=f, check = True)
+        #subprocess.run("cd %s && ./eval2.sh" %(path), shell=True, stdout=f, check = True)
         f.close()
         
     def reset_running(self,X):
