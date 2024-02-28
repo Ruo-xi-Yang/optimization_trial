@@ -23,8 +23,8 @@ def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_so
 
     s.write('source /home/ruoxi/PyFR-DEVELOP/pyfr-develop1/bin/activate'+'\n')
 
-    #s.write('mpiexec -n 4 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+main_ini_file+'\n')
-    s.write('mpiexec -n 4 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+second_ini_file+'\n')
+    s.write('mpiexec -n 4 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+main_ini_file+'\n')
+    #s.write('mpiexec -n 4 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+second_ini_file+'\n')
         
         
         
