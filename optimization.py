@@ -73,7 +73,7 @@ evaluated_path = "gen_%s/optimum_gen%s.csv" %(evaluated_gen,evaluated_gen)
 
 # PROBLEM DEFINITION -----------------------------------------------------
 
-order = 1                           # polynomial order
+order = 4                           # polynomial order
 AoA = 12                             # Angle of attack
 c = 1                                # chord length
 
@@ -93,11 +93,11 @@ mu = c*u_inf*rho_inf/Re               # dynamic viscosity mu = 0.00033333333
 
 if optimisation == "2D":
     b = 1                            # span length
-    dt = 0.00014                 # time step
+    dt = 0.00007                 # time step
     tstart = 0                       # simulation start time
     tperturb = 5                     # sinusoidal perturbation time
     avg_from = 5                # extract averages from
-    tend = 10                     # total convective times
+    tend = 50                     # total convective times
     GPUs = 4                         # number of GPUs for parallelisation
     wctime = '0-03:00:00'            # wall clock time for each individual to run
     waitingtime1 = 45*60             # waiting time while all cases are running
@@ -229,7 +229,7 @@ class MyProblem(Problem):
                 # while2broken = False
                 # timebreak1 = time.time() + timeout1
                 # timebreak2 = time.time() + timeout2
-                sleep_for(240)
+                sleep_for(3000)
             # if (optimisation == "3D" and run_p_sep):
             #     #running = np.full((len(X), 1), False, dtype=bool)
             #     #finished = np.full((len(X), 1), False, dtype=bool)
@@ -512,7 +512,7 @@ class MyProblem(Problem):
     def data_extract(self,i,dv1,dv2):        
         output_forces = 10
         # not_wanted_lines = avg_from/(dt*output_forces)
-        not_wanted_lines = 5000
+        not_wanted_lines = 28571
         q_inf = 0.5*rho_inf*u_inf**2
         q_inf_2 = 0.5*rho_inf*u_inf_2**2
         S = c*b
