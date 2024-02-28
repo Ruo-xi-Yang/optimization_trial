@@ -5,7 +5,7 @@ import os
 
 # SUBMISSION FILE -----------------------------------------------------------------------------------
 
-def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_sol_file,t,opt):
+def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,second_ini_file,p_sol_file,t,opt):
     s=open('%s/job.sub' %(idvpath),'w')
     s.write('#!/bin/bash'+'\n')
     s.write('#$ -N testcase'+'\n')
@@ -24,29 +24,29 @@ def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_so
     s.write('source /home/ruoxi/PyFR-DEVELOP/pyfr-develop1/bin/activate'+'\n')
 
     s.write('mpiexec -n 4 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+main_ini_file+'\n')
-    #s.write('mpiexec -n 4 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+second_ini_file+'\n')
+    s.write('mpiexec -n 4 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+second_ini_file+'\n')
 
 #second sub file
 
-def cirrus_jobfile_2(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_sol_file,t,opt):
-    s=open('%s/job2.sub' %(idvpath),'w')
-    s.write('#!/bin/bash'+'\n')
-    s.write('#$ -N testcase'+'\n')
-    s.write('#$ -wd %s\n' % idvpath)
-    s.write('#$ -j y'+'\n')
-    s.write('#$ -pe mpi 4'+'\n')
-    s.write('#$ -l v100'+'\n')
+# def cirrus_jobfile_2(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,p_sol_file,t,opt):
+#     s=open('%s/job2.sub' %(idvpath),'w')
+#     s.write('#!/bin/bash'+'\n')
+#     s.write('#$ -N testcase'+'\n')
+#     s.write('#$ -wd %s\n' % idvpath)
+#     s.write('#$ -j y'+'\n')
+#     s.write('#$ -pe mpi 4'+'\n')
+#     s.write('#$ -l v100'+'\n')
 
-    s.write('source /home/ruoxi/.bashrc'+'\n')
-    #s.write('export LD_LIBRARY_PATH='/usr/local/cuda-11.7/lib64':$LD_LIBRARY_PATH'+'\n')
-    s.write("export LD_LIBRARY_PATH='/usr/local/cuda-11.7/lib64':$LD_LIBRARY_PATH\n")
-    s.write("export LIBRARY_PATH='/usr/local/cuda-11.7/include':$LIBRARY_PATH\n")
-    s.write("export PATH='/usr/local/cuda-11.7/bin':$PATH\n")
-    s.write('module load rocks-openmpi'+'\n')
+#     s.write('source /home/ruoxi/.bashrc'+'\n')
+#     #s.write('export LD_LIBRARY_PATH='/usr/local/cuda-11.7/lib64':$LD_LIBRARY_PATH'+'\n')
+#     s.write("export LD_LIBRARY_PATH='/usr/local/cuda-11.7/lib64':$LD_LIBRARY_PATH\n")
+#     s.write("export LIBRARY_PATH='/usr/local/cuda-11.7/include':$LIBRARY_PATH\n")
+#     s.write("export PATH='/usr/local/cuda-11.7/bin':$PATH\n")
+#     s.write('module load rocks-openmpi'+'\n')
 
-    s.write('source /home/ruoxi/PyFR-DEVELOP/pyfr-develop1/bin/activate'+'\n')
+#     s.write('source /home/ruoxi/PyFR-DEVELOP/pyfr-develop1/bin/activate'+'\n')
 
-    s.write('mpiexec -n 4 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+second_ini_file+'\n')
+#     s.write('mpiexec -n 4 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+second_ini_file+'\n')
         
         
         
@@ -314,7 +314,6 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
         # # f.write('pyfr restart -b openmp -p '+str(AoA)+'AoA-gen-'
         # #     +str(n)+'-idv-'+str(i)+'.pyfrm '+p_sol_file+' Re3000M015.ini')
         f.write('qsub job.sub'+'\n')
-        f.write('qsub job2.sub'+'\n')
     if optimisation == "3D":
         f.write('sbatch p_job.slurm'+'\n')
     f.close()
