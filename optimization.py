@@ -56,9 +56,9 @@ prob_c = 0.2                         # crossover probability
 eta_m = 15                           # mutation eta
 eta_c = 20                           # crossover eta
 
-population = 30                   # population size
-offspring = 15                    # number of offspring
-n_max_gen = 8                      # number of generations
+population = 2                  # population size
+offspring = 1                    # number of offspring
+n_max_gen = 10                     # number of generations
 
 global ngen
 restart = "No"                       # restart optimisation from checkpoint
@@ -96,8 +96,8 @@ if optimisation == "2D":
     dt = 0.00007                 # time step
     tstart = 0                       # simulation start time
     tperturb = 5                     # sinusoidal perturbation time
-    avg_from = 50               # extract averages from
-    tend = 100                     # total convective times
+    avg_from = 20               # extract averages from
+    tend = 50                   # total convective times
     GPUs = 4                         # number of GPUs for parallelisation
     wctime = '0-03:00:00'            # wall clock time for each individual to run
     waitingtime1 = 45*60             # waiting time while all cases are running
@@ -512,7 +512,7 @@ class MyProblem(Problem):
     def data_extract(self,i,dv1,dv2):        
         output_forces = 10
         # not_wanted_lines = avg_from/(dt*output_forces)
-        not_wanted_lines = 71400
+        not_wanted_lines = 28517
         q_inf = 0.5*rho_inf*u_inf**2
         q_inf_2 = 0.5*rho_inf*u_inf_2**2
         S = c*b
