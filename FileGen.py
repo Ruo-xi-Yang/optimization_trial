@@ -11,7 +11,7 @@ def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,seco
     s.write('#$ -N testcase'+'\n')
     s.write('#$ -wd %s\n' % idvpath)
     s.write('#$ -j y'+'\n')
-    s.write('#$ -pe mpi 1'+'\n')
+    s.write('#$ -pe mpi 2'+'\n')
     s.write('#$ -l v100'+'\n')
 
     s.write('source /home/ruoxi/.bashrc'+'\n')
@@ -23,8 +23,8 @@ def cirrus_jobfile(n,idvpath,GPUs,wctime,i,x,y,AoA,p_ini_file,main_ini_file,seco
 
     s.write('source /home/ruoxi/PyFR-DEVELOP/pyfr-develop1/bin/activate'+'\n')
 
-    s.write('mpiexec -n 1 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+main_ini_file+'\n')
-    s.write('mpiexec -n 1 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+second_ini_file+'\n')
+    s.write('mpiexec -n 2 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+main_ini_file+'\n')
+    s.write('mpiexec -n 2 pyfr -p run -b cuda '+str(AoA)+ 'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm '+second_ini_file+'\n')
 
 #second sub file
 
@@ -301,7 +301,7 @@ def eval_file(n,i,idvpath,optimisation,AoA,GPUs):
     f.write('/home/ruoxi/PyFR-15/pyfrv15/bin/pyfr import '+str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.msh '
             +str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm'+'\n') 
     #f.write('/home/ruoxi/PyFR-15/pyfrv15/bin/pyfr partition 8 '+str(AoA)+'AoA-gen-'+str(n)+'-idv-'+str(i)+'.pyfrm'+'\n') 
-    # f.write('/home/ruoxi/PyFR-15/pyfrv15/bin/pyfr partition 4 ' + str(AoA) +'AoA-gen-' + str(n) + '-idv-' + str(i) + '.pyfrm ' + '%s\n' % idvpath)
+    f.write('/home/ruoxi/PyFR-15/pyfrv15/bin/pyfr partition 2 ' + str(AoA) +'AoA-gen-' + str(n) + '-idv-' + str(i) + '.pyfrm ' + '%s\n' % idvpath)
 
     
     if optimisation == "3D":
