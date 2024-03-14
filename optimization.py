@@ -229,7 +229,7 @@ class MyProblem(Problem):
                 # while2broken = False
                 # timebreak1 = time.time() + timeout1
                 # timebreak2 = time.time() + timeout2
-                sleep_for(3000)
+                sleep_for(1800)
             # if (optimisation == "3D" and run_p_sep):
             #     #running = np.full((len(X), 1), False, dtype=bool)
             #     #finished = np.full((len(X), 1), False, dtype=bool)
